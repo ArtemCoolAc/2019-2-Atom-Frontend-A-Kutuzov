@@ -26,6 +26,9 @@ nonUniqueElements([10, 9, 10, 10, 9, 8]) == [10, 9, 10, 10, 9]
 
 export default function nonUniqueElements(data) {
   // your solution goes here
-
-  return data
+  return data.filter(function(element){
+    return data.indexOf(element) !== data.lastIndexOf(element) // проверка на уникальность: первый и последний индексы равны => уникальный
+    // иначе неуникальный
+    // filter как раз фильтрует массив, оставляя только уникальные элементы
+  });
 }
