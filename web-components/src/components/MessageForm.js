@@ -1,21 +1,69 @@
 const template = document.createElement('template');
 template.innerHTML = `
     <style>
-        form-input {
+        *{
+            margin: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            font-family: Arial, Helvetica, sans-serif;
+            height: 100vh;
+        }
+        
+        :host {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .message-header {
+            width: 100%;
+            background-color: #2C2D2F;
+        }
+        
+        .main-field {
+            display: flex;
+            flex-direction: column-reverse;
+            align-content: flex-end;
+            width: 100%;
+            height: calc(100vh - 115px);
+            overflow-y: auto;
+            background: url("/src/images/background_blue.png") 50% 50%;
+        }
+        
+        .message-field {
+            display: flex;
+            width: 100%;
+            flex-wrap: wrap;
+            align-content: flex-end;
+        }
+        
+        message-shell {
+            box-sizing: border-box;
+            padding: 2px 5px 10px 10px;
             width: 100%;
         }
-
-        .result {
-            color: red;
+        
+        .input-line {
+            width: 100%;
+            flex: auto;
+            background-color: darksalmon;
         }
-
-        input[type=submit] {
-            visibility: collapse;
-        }
+        
     </style>
     <form>
-        <div class="result"></div>
-        <form-input name="message-text" placeholder="Введите сообщение"></form-input>
+        <div class="message-header">
+            <chat-header></chat-header>
+        </div>
+        <div class="main-field">
+            <div class="message-field"></div>
+            <!--<chat-field></chat-field>-->
+        </div>
+        <div class="input-line">
+            <form-input placeholder="Порадуй собеседника!"></form-input>
+        </div>
     </form>
 `;
 
@@ -24,22 +72,87 @@ class MessageForm extends HTMLElement {
         super();
         this._shadowRoot = this.attachShadow({ mode: 'open' });
         this._shadowRoot.appendChild(template.content.cloneNode(true));
+        this.$header = this._shadowRoot.querySelector('message-header');
         this.$form = this._shadowRoot.querySelector('form');
+        this.$chat = this._shadowRoot.querySelector('.message-field');
         this.$input = this._shadowRoot.querySelector('form-input');
-        this.$message = this._shadowRoot.querySelector('.result');
+        this.counterMessageID = 0;
+        if (typeof localStorage.counter !== "undefined") {
+            this.counterMessageID = localStorage.getItem('counter');
+            this._loadMessages();
+        }
 
-        this.$form.addEventListener('submit', this._onSubmit.bind(this));
-        this.$form.addEventListener('keypress', this._onKeyPress.bind(this));
+        //this.$form.addEventListener('submit', this._onSubmit.bind(this));
+        this.$input.addEventListener('submit', this._onSubmit.bind(this));
+        this.$input.addEventListener('keypress', this._onKeyPress.bind(this));
     }
 
     _onSubmit (event) {
-        event.preventDefault();
-        this.$message.innerText = this.$input.value;
+        /*event.preventDefault();*/
+        console.log('from button');
+        if (this.$input.value !== '') {
+            this._createNewMessage(this.$input.value);
+            this.$input.setAttribute('value', '');
+        }
+    }
+
+    _loadMessages() {
+        let previous_date = '';
+        let string_keys = Object.keys(localStorage).filter(local_key => local_key.slice(0,7) === 'message');
+        let keys = string_keys.map(key => Number.parseInt(key.slice(7))).sort((a, b) => a - b).map(key => String(key));
+        for (let key of keys) {
+            let messageData = JSON.parse(localStorage.getItem('message' + key));
+            let current_date = messageData.date;
+            if (current_date !== previous_date) {
+                this._addDateLine(current_date);
+                previous_date = current_date;
+            }
+            this._insertMessage(messageData);
+        }
+    }
+
+    _addDateLine(date) {
+        let element = document.createElement('history-date');
+        element = this.$chat.appendChild(element);
+        element.setAttribute('date', date);
+        /*element.date = date;*/
+    }
+
+    _createNewMessage (messageText, messageOwner='self') {
+        let datetime = new Date();
+        let MessageData = {
+            messageId: this.counterMessageID,
+            text: messageText,
+            time: datetime.getHours() + ':' + String(datetime.getMinutes()).padStart(2, '0'),
+            date: datetime.getDate() + ' ' + datetime.getMonth() + ' ' + datetime.getFullYear(),
+            full_date: datetime,
+            /*year: datetime.getFullYear(),
+            month: datetime.getMonth(),
+            day: datetime.getDay(),*/
+            owner: messageOwner
+        };
+        localStorage.setItem('message' + datetime.getFullYear() +
+            String(datetime.getMonth() + 1).padStart(2, '0') +
+            String(datetime.getDate()).padStart(2, '0') +
+            this.counterMessageID, JSON.stringify(MessageData));
+        this.counterMessageID = Number.parseInt(this.counterMessageID) + 1;
+        localStorage.setItem('counter', this.counterMessageID);
+        this._insertMessage(MessageData);
+    }
+
+    _insertMessage(messageData) {
+        this.$chat.innerHTML += `
+        <message-shell
+            ID="${messageData['ID']}"
+            text="${messageData['text']}"
+            time="${messageData['time']}"
+            owner="${messageData['owner']}" 
+        >''</message-shell>`;
     }
 
     _onKeyPress (event) {
-        if (event.keyCode == 13) {
-            this.$form.dispatchEvent(new Event('submit'));
+        if (event.keyCode === 13) {
+            this.$input.dispatchEvent(new Event('submit'));
         }
     }
 }

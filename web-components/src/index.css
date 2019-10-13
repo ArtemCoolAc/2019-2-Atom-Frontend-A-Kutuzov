@@ -1,19 +1,12 @@
-html {
-  box-sizing: border-box;
+html, body{
+    height: 100%;
+    color: #FCE1E5;
+    font-size: 1.05em;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
-
-body {
+*, *::before, *:after {
   margin: 0;
-  background-color: #fff;
-  color: #333;
-  font-size: 15px;
-  font-family: Helvetica, Arial, sans-serif;
-  font-weight: 400;
-  line-height: 20px;
+  padding: 0;
+  box-sizing: inherit;
 }
