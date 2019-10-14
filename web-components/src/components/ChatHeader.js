@@ -1,5 +1,5 @@
 const template = document.createElement('template');
-template.innerHTML= `
+template.innerHTML = `
     <style>
         *{
             margin: 0;
@@ -84,11 +84,11 @@ template.innerHTML= `
 `;
 
 class ChatHeader extends HTMLElement {
-    constructor() {
-        super();
-        this._shadowRoot = this.attachShadow({mode: 'open'});
-        this._shadowRoot.appendChild(template.content.cloneNode(true));
-    }
+  constructor() {
+    super();
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._shadowRoot.appendChild(template.content.cloneNode(true));
+  }
 }
 
 

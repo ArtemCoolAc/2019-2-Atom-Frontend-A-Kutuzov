@@ -1,5 +1,5 @@
 const template = document.createElement('template');
-template.innerHTML=`
+template.innerHTML = `
     <style>
         *{
             margin: 0;
@@ -26,42 +26,41 @@ template.innerHTML=`
 `;
 
 class HistoryDate extends HTMLElement {
-    constructor() {
-        super();
-        this._shadowRoot = this.attachShadow({mode: 'open'});
-        this._shadowRoot.appendChild(template.content.cloneNode(true));
+  constructor() {
+    super();
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._shadowRoot.appendChild(template.content.cloneNode(true));
 
-        this.$textDate = this._shadowRoot.querySelector('.textDate');
+    this.$textDate = this._shadowRoot.querySelector('.textDate');
+  }
+
+  static get observedAttributes() {
+    return ['date'];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === 'date') {
+      this.date = newValue;
     }
+    this.renderDateLine();
+  }
 
-    static get observedAttributes() {
-        return ['date'];
-    }
-
-    attributeChangedCallback(name, oldValue, newValue) {
-        if (name === 'date') {
-            this.date = newValue;
-        }
-        this._renderDateLine();
-    }
-
-    /*set date(date) {
+  /* set date(date) {
         this.setAttribute('date', date);
-    }*/
+    } */
 
-    _renderDateLine() {
-        let our_month = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
-        let now = new Date();
-        let current = now.getDate() + ' ' + now.getMonth() + ' ' + now.getFullYear();
-        let date = this.date;
-        if (this.date === current) {
-            this.$textDate.innerText = 'Сегодня, ';
-        }
-        let tmp = date.split(' ');
-        let normalDate = {day: tmp[0], month: tmp[1], year: tmp[2]};
-        this.$textDate.innerText += ' ' + normalDate.day + ' ' + our_month[normalDate.month] + ' ' + normalDate.year;
+  renderDateLine() {
+    const ourMonth = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+    const now = new Date();
+    const current = `${now.getDate()} ${now.getMonth()} ${now.getFullYear()}`;
+    const { date } = this;
+    if (this.date === current) {
+      this.$textDate.innerText = 'Сегодня, ';
     }
-
+    const tmp = date.split(' ');
+    const normalDate = { day: tmp[0], month: tmp[1], year: tmp[2] };
+    this.$textDate.innerText += ` ${normalDate.day} ${ourMonth[normalDate.month]} ${normalDate.year}`;
+  }
 }
 
 

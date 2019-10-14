@@ -68,93 +68,91 @@ template.innerHTML = `
 `;
 
 class MessageForm extends HTMLElement {
-    constructor () {
-        super();
-        this._shadowRoot = this.attachShadow({ mode: 'open' });
-        this._shadowRoot.appendChild(template.content.cloneNode(true));
-        this.$header = this._shadowRoot.querySelector('message-header');
-        this.$form = this._shadowRoot.querySelector('form');
-        this.$chat = this._shadowRoot.querySelector('.message-field');
-        this.$input = this._shadowRoot.querySelector('form-input');
-        this.counterMessageID = 0;
-        if (typeof localStorage.counter !== "undefined") {
-            this.counterMessageID = localStorage.getItem('counter');
-            this._loadMessages();
-        }
-
-        //this.$form.addEventListener('submit', this._onSubmit.bind(this));
-        this.$input.addEventListener('submit', this._onSubmit.bind(this));
-        this.$input.addEventListener('keypress', this._onKeyPress.bind(this));
+  constructor() {
+    super();
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._shadowRoot.appendChild(template.content.cloneNode(true));
+    this.$header = this._shadowRoot.querySelector('message-header');
+    this.$form = this._shadowRoot.querySelector('form');
+    this.$chat = this._shadowRoot.querySelector('.message-field');
+    this.$input = this._shadowRoot.querySelector('form-input');
+    this.counterMessageID = 0;
+    if (typeof localStorage.counter !== 'undefined') {
+      this.counterMessageID = localStorage.getItem('counter');
+      this.loadMessages();
     }
 
-    _onSubmit (event) {
-        /*event.preventDefault();*/
-        console.log('from button');
-        if (this.$input.value !== '') {
-            this._createNewMessage(this.$input.value);
-            this.$input.setAttribute('value', '');
-        }
-    }
+    this.$input.addEventListener('submit', this._onSubmit.bind(this));
+    this.$input.addEventListener('keypress', this._onKeyPress.bind(this));
+  }
 
-    _loadMessages() {
-        let previous_date = '';
-        let string_keys = Object.keys(localStorage).filter(local_key => local_key.slice(0,7) === 'message');
-        let keys = string_keys.map(key => Number.parseInt(key.slice(7))).sort((a, b) => a - b).map(key => String(key));
-        for (let key of keys) {
-            let messageData = JSON.parse(localStorage.getItem('message' + key));
-            let current_date = messageData.date;
-            if (current_date !== previous_date) {
-                this._addDateLine(current_date);
-                previous_date = current_date;
-            }
-            this._insertMessage(messageData);
-        }
+  _onSubmit() {
+    if (this.$input.value !== '') {
+      this.createNewMessage(this.$input.value);
+      this.$input.setAttribute('value', '');
     }
+  }
 
-    _addDateLine(date) {
-        let element = document.createElement('history-date');
-        element = this.$chat.appendChild(element);
-        element.setAttribute('date', date);
-        /*element.date = date;*/
+  loadMessages() {
+    let previousDate = '';
+    const stringKeys = Object.keys(localStorage).filter((localKey) => localKey.slice(0, 7) === 'message');
+    const keys = stringKeys.map((key) => Number.parseInt(key.slice(7), 10))
+      .sort((a, b) => a - b).map((key) => String(key));
+    for (const key of keys) {
+      const messageData = JSON.parse(localStorage.getItem(`message${key}`));
+      const currentDate = messageData.date;
+      if (currentDate !== previousDate) {
+        this.addDateLine(currentDate);
+        previousDate = currentDate;
+      }
+      this.insertMessage(messageData);
     }
+  }
 
-    _createNewMessage (messageText, messageOwner='self') {
-        let datetime = new Date();
-        let MessageData = {
-            messageId: this.counterMessageID,
-            text: messageText,
-            time: datetime.getHours() + ':' + String(datetime.getMinutes()).padStart(2, '0'),
-            date: datetime.getDate() + ' ' + datetime.getMonth() + ' ' + datetime.getFullYear(),
-            full_date: datetime,
-            /*year: datetime.getFullYear(),
+  addDateLine(date) {
+    let element = document.createElement('history-date');
+    element = this.$chat.appendChild(element);
+    element.setAttribute('date', date);
+    /* element.date = date; */
+  }
+
+  createNewMessage(messageText, messageOwner = 'self') {
+    const datetime = new Date();
+    const MessageData = {
+      messageId: this.counterMessageID,
+      text: messageText,
+      time: `${datetime.getHours()}:${String(datetime.getMinutes()).padStart(2, '0')}`,
+      date: `${datetime.getDate()} ${datetime.getMonth()} ${datetime.getFullYear()}`,
+      full_date: datetime,
+      /* year: datetime.getFullYear(),
             month: datetime.getMonth(),
-            day: datetime.getDay(),*/
-            owner: messageOwner
-        };
-        localStorage.setItem('message' + datetime.getFullYear() +
-            String(datetime.getMonth() + 1).padStart(2, '0') +
-            String(datetime.getDate()).padStart(2, '0') +
-            this.counterMessageID, JSON.stringify(MessageData));
-        this.counterMessageID = Number.parseInt(this.counterMessageID) + 1;
-        localStorage.setItem('counter', this.counterMessageID);
-        this._insertMessage(MessageData);
-    }
+            day: datetime.getDay(), */
+      owner: messageOwner,
+    };
+    localStorage.setItem(`message${datetime.getFullYear()
+    }${String(datetime.getMonth() + 1).padStart(2, '0')
+    }${String(datetime.getDate()).padStart(2, '0')
+    }${this.counterMessageID}`, JSON.stringify(MessageData));
+    this.counterMessageID = Number.parseInt(this.counterMessageID, 10) + 1;
+    localStorage.setItem('counter', this.counterMessageID);
+    this.insertMessage(MessageData);
+  }
 
-    _insertMessage(messageData) {
-        this.$chat.innerHTML += `
+  insertMessage(messageData) {
+    this.$chat.innerHTML += `
         <message-shell
-            ID="${messageData['ID']}"
-            text="${messageData['text']}"
-            time="${messageData['time']}"
-            owner="${messageData['owner']}" 
+            ID="${messageData.ID}"
+            text="${messageData.text}"
+            time="${messageData.time}"
+            owner="${messageData.owner}" 
         >''</message-shell>`;
-    }
+  }
 
-    _onKeyPress (event) {
-        if (event.keyCode === 13) {
-            this.$input.dispatchEvent(new Event('submit'));
-        }
+  _onKeyPress(event) {
+    if (event.keyCode === 13) {
+      this.$input.dispatchEvent(new Event('submit'));
     }
+  }
 }
 
 customElements.define('message-form', MessageForm);

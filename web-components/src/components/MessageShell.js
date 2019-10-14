@@ -48,45 +48,46 @@ template.innerHTML = `
 `;
 
 class MessageShell extends HTMLElement {
-    constructor() {
-        super();
-        this._shadowRoot = this.attachShadow({mode: 'open'});
-        this._shadowRoot.appendChild(template.content.cloneNode(true));
+  constructor() {
+    super();
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._shadowRoot.appendChild(template.content.cloneNode(true));
 
-        this.$messageBox = this._shadowRoot.querySelector('.messageWrap');
-        this.$messageText = this._shadowRoot.querySelector('.text');
-        this.$messageTime = this._shadowRoot.querySelector('.datetime');
-        this.$messageDate = this._shadowRoot.querySelector('.date');
+    this.$messageBox = this._shadowRoot.querySelector('.messageWrap');
+    this.$messageText = this._shadowRoot.querySelector('.text');
+    this.$messageTime = this._shadowRoot.querySelector('.datetime');
+    this.$messageDate = this._shadowRoot.querySelector('.date');
+  }
+
+  static get observedAttributes() {
+    return ['ID', 'text', 'time', 'date', 'owner'];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    switch (name) {
+      case 'ID':
+        this.$messageBox.setAttribute('messageID', newValue);
+        break;
+
+      case 'text':
+        this.$messageText.innerText = newValue;
+        break;
+
+      case 'time':
+        this.$messageTime.innerText = newValue;
+        break;
+
+      case 'date':
+        this.$messageDate.innerText = newValue;
+        break;
+
+      case 'owner':
+        this.$messageBox.classList.add(newValue);
+        break;
+
+      default:
     }
-
-    static get observedAttributes() {
-        return ['ID', 'text', 'time', 'date', 'owner'];
-    }
-
-    attributeChangedCallback(name, oldValue, newValue) {
-        console.log('Shell');
-        switch (name) {
-            case 'ID':
-                this.$messageBox.setAttribute('messageID', newValue);
-                break;
-
-            case 'text':
-                this.$messageText.innerText = newValue;
-                break;
-
-            case 'time':
-                this.$messageTime.innerText = newValue;
-                break;
-
-            case 'date':
-                this.$messageDate.innerText = newValue;
-                break;
-
-            case 'owner':
-                this.$messageBox.classList.add(newValue);
-                break;
-        }
-    }
+  }
 }
 
 customElements.define('message-shell', MessageShell);

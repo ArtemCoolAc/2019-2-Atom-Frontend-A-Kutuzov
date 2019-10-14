@@ -45,35 +45,35 @@ template.innerHTML = `
 `;
 
 class FormInput extends HTMLElement {
-    constructor () {
-        super();
-        this._shadowRoot = this.attachShadow({ mode: 'open' });
-        this._shadowRoot.appendChild(template.content.cloneNode(true));
+  constructor() {
+    super();
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._shadowRoot.appendChild(template.content.cloneNode(true));
 
-        this.$input = this._shadowRoot.querySelector('input');
-        this.$enterButton = this._shadowRoot.querySelector('.EnterButton');
+    this.$input = this._shadowRoot.querySelector('input');
+    this.$enterButton = this._shadowRoot.querySelector('.EnterButton');
 
-        this.$enterButton.addEventListener('click', this._onSubmit.bind(this));
+    this.$enterButton.addEventListener('click', this._onSubmit.bind(this));
+  }
+
+  _onSubmit() {
+    this.dispatchEvent(new Event('submit'));
+  }
+
+  static get observedAttributes() {
+    return ['name', 'value', 'placeholder', 'disabled'];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === 'value') {
+      this.$input.value = newValue;
     }
+    this.$input.setAttribute(name, newValue);
+  }
 
-    _onSubmit() {
-        this.dispatchEvent(new Event('submit'));
-    }
-
-    static get observedAttributes() {
-        return ['name', 'value', 'placeholder', 'disabled'];
-    }
-
-    attributeChangedCallback(name, oldValue, newValue) {
-        if (name === 'value') {
-            this.$input.value = newValue;
-        }
-        this.$input.setAttribute(name, newValue);
-    }
-
-    get value() {
-        return this.$input.value;
-    }
+  get value() {
+    return this.$input.value;
+  }
 }
 
 customElements.define('form-input', FormInput);
