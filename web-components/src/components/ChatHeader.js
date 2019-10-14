@@ -29,7 +29,7 @@ template.innerHTML = `
         }
         
         .personProperties .avatar {
-            background: url(/src/images/Ава1.jpg) no-repeat center; 
+            background: url(static/images/Ава1.jpg) no-repeat center; 
             background-size: cover;
             border-radius: 25px;
             margin-right: 15px;
