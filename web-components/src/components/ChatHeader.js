@@ -52,7 +52,8 @@ template.innerHTML = `
         }
         
         .returnBack{
-            background: url(/src/images/return_but.png) no-repeat center;
+            /*background: url(/src/images/return_but.png) no-repeat center;*/
+            background: url(../static/images/return_but.png) no-repeat center;
             background-size: 100%;
             width: 40px;
         }
@@ -60,12 +61,14 @@ template.innerHTML = `
         .searchButton{
             margin: 0;
             width: 40px;
-            background: url(/src/images/searching.webp) no-repeat center;
+            /*background: url(/src/images/searching.webp) no-repeat center;*/
+            background: url(../static/images/searching.webp) no-repeat center;
             background-size: 90%;          
         }
 
         .optionsButton{
-            background: url(/src/images/opt.png) no-repeat center;
+            /*background: url(/src/images/opt.png) no-repeat center;*/
+            background: url(../static/images/opt.png) no-repeat center;
             background-size: 90%;
             width: 40px;
         }    

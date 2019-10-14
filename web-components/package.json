@@ -25,7 +25,9 @@
   "name": "web-components",
   "version": "1.0.0",
   "main": "webpack.config.js",
-  "dependencies": {},
+  "dependencies": {
+    "copy-webpack-plugin": "^5.0.4"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
