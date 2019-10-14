@@ -146,4 +146,3 @@ docs/_book/
 jest_*/
 .jscpd/
 .idea
-build
