@@ -45,10 +45,6 @@ class HistoryDate extends HTMLElement {
     this.renderDateLine();
   }
 
-  /* set date(date) {
-        this.setAttribute('date', date);
-    } */
-
   renderDateLine() {
     const ourMonth = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
     const now = new Date();
@@ -57,9 +53,8 @@ class HistoryDate extends HTMLElement {
     if (this.date === current) {
       this.$textDate.innerText = 'Сегодня, ';
     }
-    const tmp = date.split(' ');
-    const normalDate = { day: tmp[0], month: tmp[1], year: tmp[2] };
-    this.$textDate.innerText += ` ${normalDate.day} ${ourMonth[normalDate.month]} ${normalDate.year}`;
+    const [day, month, year] = date.split(' ');
+    this.$textDate.innerText += ` ${day} ${ourMonth[month]} ${year}`;
   }
 }
 

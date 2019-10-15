@@ -12,8 +12,6 @@ template.innerHTML = `
             padding: 5px 10px 5px 10px;
             border-radius: 10px; /*let's make rounded rectangle*/
             text-align: left;
-            /*text-align: justify;*/
-            /*word-break: break-all;*/
             word-wrap: break-word;
             max-width: 55%;
         }

@@ -30,7 +30,6 @@ template.innerHTML = `
             width: 100%;
             height: calc(100vh - 115px);
             overflow-y: auto;
-            /*background: url("/src/images/background_blue.png") 50% 50%;*/
             background: url("static/images/background_blue.png") 50% 50%;
         }
         
