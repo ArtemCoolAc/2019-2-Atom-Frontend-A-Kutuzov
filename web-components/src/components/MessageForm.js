@@ -2,7 +2,6 @@ const template = document.createElement('template');
 template.innerHTML = `
     <style>
         *{
-            margin: 0;
             box-sizing: border-box;
         }
         
@@ -76,10 +75,12 @@ class MessageForm extends HTMLElement {
     this.$form = this._shadowRoot.querySelector('form');
     this.$chat = this._shadowRoot.querySelector('.message-field');
     this.$input = this._shadowRoot.querySelector('form-input');
-    this.counterMessageID = 0;
-    if (typeof localStorage.counter !== 'undefined') {
-      this.counterMessageID = localStorage.getItem('counter');
-      this.loadMessages();
+    this.counterMessageID = localStorage.getItem('counter');
+    if (Number.isNaN(Number.parseInt(this.counterMessageID, 10))) {
+      this.counterMessageID = 0;
+      localStorage.setItem('message', JSON.stringify([]));
+    } else {
+      this.loadLocalStoreMessages();
     }
 
     this.$input.addEventListener('submit', this._onSubmit.bind(this));
@@ -93,13 +94,10 @@ class MessageForm extends HTMLElement {
     }
   }
 
-  loadMessages() {
+  loadLocalStoreMessages() {
     let previousDate = '';
-    const stringKeys = Object.keys(localStorage).filter((localKey) => localKey.slice(0, 7) === 'message');
-    const keys = stringKeys.map((key) => Number.parseInt(key.slice(7), 10))
-      .sort((a, b) => a - b).map((key) => String(key));
-    for (const key of keys) {
-      const messageData = JSON.parse(localStorage.getItem(`message${key}`));
+    const data = JSON.parse(localStorage.getItem('message'));
+    for (const messageData of data) {
       const currentDate = messageData.date;
       if (currentDate !== previousDate) {
         this.addDateLine(currentDate);
@@ -113,7 +111,6 @@ class MessageForm extends HTMLElement {
     let element = document.createElement('history-date');
     element = this.$chat.appendChild(element);
     element.setAttribute('date', date);
-    /* element.date = date; */
   }
 
   createNewMessage(messageText, messageOwner = 'self') {
@@ -124,15 +121,15 @@ class MessageForm extends HTMLElement {
       time: `${datetime.getHours()}:${String(datetime.getMinutes()).padStart(2, '0')}`,
       date: `${datetime.getDate()} ${datetime.getMonth()} ${datetime.getFullYear()}`,
       full_date: datetime,
-      /* year: datetime.getFullYear(),
-            month: datetime.getMonth(),
-            day: datetime.getDay(), */
       owner: messageOwner,
     };
-    localStorage.setItem(`message${datetime.getFullYear()
-    }${String(datetime.getMonth() + 1).padStart(2, '0')
-    }${String(datetime.getDate()).padStart(2, '0')
-    }${this.counterMessageID}`, JSON.stringify(MessageData));
+    this.insertLocalStorageData(MessageData);
+  }
+
+  insertLocalStorageData(MessageData) {
+    const data = JSON.parse(localStorage.getItem('message'));
+    data.push(MessageData);
+    localStorage.setItem('message', JSON.stringify(data));
     this.counterMessageID = Number.parseInt(this.counterMessageID, 10) + 1;
     localStorage.setItem('counter', this.counterMessageID);
     this.insertMessage(MessageData);

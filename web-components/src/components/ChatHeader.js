@@ -2,7 +2,6 @@ const template = document.createElement('template');
 template.innerHTML = `
     <style>
         *{
-            margin: 0;
             box-sizing: border-box;
         }
         

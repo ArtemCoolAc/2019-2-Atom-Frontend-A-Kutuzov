@@ -1,10 +1,6 @@
 const template = document.createElement('template');
 template.innerHTML = `
     <style>
-        *{
-            margin: 0;
-            padding: 0;
-        }
         
         input {
             flex: auto;
@@ -29,13 +25,11 @@ template.innerHTML = `
         }
         
         .AddFileButton {
-            /*background: url(/src/images/clip.png) center no-repeat;*/
             background: url(static/images/clip.png) center no-repeat;
             background-size: 90%;
         }
         
         .EnterButton {
-            /*background: url(/src/images/confirm_button.png) center no-repeat;*/
             background: url(static/images/confirm_button.png) center no-repeat;
             background-size: 90%;
         }
