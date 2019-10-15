@@ -70,13 +70,7 @@ class MessageShell extends HTMLElement {
         break;
 
       case 'text':
-        this.$messageText.innerText = newValue;
-        break;
-
       case 'time':
-        this.$messageTime.innerText = newValue;
-        break;
-
       case 'date':
         this.$messageDate.innerText = newValue;
         break;
