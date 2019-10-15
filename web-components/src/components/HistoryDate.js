@@ -50,7 +50,7 @@ class HistoryDate extends HTMLElement {
     const now = new Date();
     const current = `${now.getDate()} ${now.getMonth()} ${now.getFullYear()}`;
     const { date } = this;
-    if (this.date === current) {
+    if (date === current) {
       this.$textDate.innerText = 'Сегодня, ';
     }
     const [day, month, year] = date.split(' ');
