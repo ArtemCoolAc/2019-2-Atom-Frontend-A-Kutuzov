@@ -74,7 +74,7 @@ template.innerHTML = `
     <div class="personProperties">
         <div class="avatar"></div>
         <div class="userFIOstatus">
-            <div class="FIO">Артем NoMercy Кутузов</div>
+            <div class="FIO">Хороший преподаватель</div>
             <div class="status">онлайн</div>
         </div>
     </div>
@@ -87,6 +87,14 @@ class ChatHeader extends HTMLElement {
     super();
     this._shadowRoot = this.attachShadow({ mode: 'open' });
     this._shadowRoot.appendChild(template.content.cloneNode(true));
+
+    this.$returnButton = this._shadowRoot.querySelector('.returnBack');
+
+    this.$returnButton.addEventListener('click', this.returnButton.bind(this));
+  }
+
+  returnButton() {
+    this.dispatchEvent(new Event('clickReturnButton'));
   }
 }
 

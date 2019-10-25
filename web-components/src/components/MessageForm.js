@@ -28,7 +28,7 @@ template.innerHTML = `
             align-content: flex-end;
             width: 100%;
             height: calc(100vh - 115px);
-            overflow-y: auto;
+            overflow-y: scroll;
             background: url("static/images/background_blue.png") 50% 50%;
         }
         
@@ -75,28 +75,29 @@ class MessageForm extends HTMLElement {
     this.$form = this._shadowRoot.querySelector('form');
     this.$chat = this._shadowRoot.querySelector('.message-field');
     this.$input = this._shadowRoot.querySelector('form-input');
-    this.counterMessageID = localStorage.getItem('counter');
-    if (Number.isNaN(Number.parseInt(this.counterMessageID, 10))) {
-      this.counterMessageID = 0;
-      localStorage.setItem('message', JSON.stringify([]));
-    } else {
-      this.loadLocalStoreMessages();
-    }
+    this.messageCounter = JSON.parse(localStorage.getItem('messageCounter'));
+    this.counter = 0;
 
     this.$input.addEventListener('submit', this._onSubmit.bind(this));
     this.$input.addEventListener('keypress', this._onKeyPress.bind(this));
+  }
+
+  static get observedAttributes() {
+    return ['chatID'];
   }
 
   _onSubmit() {
     if (this.$input.value !== '') {
       this.createNewMessage(this.$input.value);
       this.$input.setAttribute('value', '');
+      this.dispatchEvent(new Event('updateList'));
     }
   }
 
   loadLocalStoreMessages() {
+    const chatID = this.getAttribute('chatID');
     let previousDate = '';
-    const data = JSON.parse(localStorage.getItem('message'));
+    const data = JSON.parse(localStorage.getItem(`chat${chatID}`));
     for (const messageData of data) {
       const currentDate = messageData.date;
       if (currentDate !== previousDate) {
@@ -107,31 +108,41 @@ class MessageForm extends HTMLElement {
     }
   }
 
+  clearMessageField() {
+    this.$chat.innerHTML = '';
+  }
+
   addDateLine(date) {
     let element = document.createElement('history-date');
     element = this.$chat.appendChild(element);
     element.setAttribute('date', date);
   }
 
-  createNewMessage(messageText, messageOwner = 'self') {
+  createNewMessage(messageText, messageOwner = 'self', messageStatus = 'unread') {
+    this.messageCounter = JSON.parse(localStorage.getItem('messageCounter')); // mesForm is earlier than Complex
     const datetime = new Date();
+    const chatID = this.getAttribute('chatID');
+    this.counter = this.messageCounter[chatID];
     const MessageData = {
-      messageId: this.counterMessageID,
+      messageId: this.counter,
       text: messageText,
       time: `${datetime.getHours()}:${String(datetime.getMinutes()).padStart(2, '0')}`,
       date: `${datetime.getDate()} ${datetime.getMonth()} ${datetime.getFullYear()}`,
       full_date: datetime,
       owner: messageOwner,
+      status: messageStatus,
     };
     this.insertLocalStorageData(MessageData);
   }
 
   insertLocalStorageData(MessageData) {
-    const data = JSON.parse(localStorage.getItem('message'));
+    const chatID = this.getAttribute('chatID');
+    const data = JSON.parse(localStorage.getItem(`chat${chatID}`));
     data.push(MessageData);
-    localStorage.setItem('message', JSON.stringify(data));
-    this.counterMessageID = Number.parseInt(this.counterMessageID, 10) + 1;
-    localStorage.setItem('counter', this.counterMessageID);
+    localStorage.setItem(`chat${chatID}`, JSON.stringify(data));
+    this.counter = Number.parseInt(this.counter, 10) + 1;
+    this.messageCounter[chatID] = this.counter;
+    localStorage.setItem('messageCounter', JSON.stringify(this.messageCounter));
     this.insertMessage(MessageData);
   }
 
