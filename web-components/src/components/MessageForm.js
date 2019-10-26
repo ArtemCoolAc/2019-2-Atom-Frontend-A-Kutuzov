@@ -28,7 +28,7 @@ template.innerHTML = `
             align-content: flex-end;
             width: 100%;
             height: calc(100vh - 115px);
-            overflow-y: scroll;
+            overflow-y: auto;
             background: url("static/images/background_blue.png") 50% 50%;
         }
         
