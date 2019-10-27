@@ -152,6 +152,7 @@ class MessageForm extends HTMLElement {
   }
 
   insertMessage(messageData, newMessage = false) {
+    newMessage = !newMessage;
     this.$chat.innerHTML += `
         <message-shell
             ID="${messageData.ID}"
