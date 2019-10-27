@@ -152,8 +152,6 @@ class MessageForm extends HTMLElement {
   }
 
   insertMessage(messageData, newMessage = false) {
-    let anim = document.createElement('newMessage');
-    let animHtml = newMessage ? anim.innerHTML : '';
     this.$chat.innerHTML += `
         <message-shell
             ID="${messageData.ID}"
