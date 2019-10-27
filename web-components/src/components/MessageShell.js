@@ -20,6 +20,26 @@ template.innerHTML = `
             float: right;
         }
         
+        .self:hover {
+            color: white;
+            background-color: purple;
+            cursor: pointer;
+        }
+        
+        .self:active {
+            animation-name: change-bg-color;
+            animation-duration: 0.5s;
+        }
+        
+        @keyframes change-bg-color {
+            from {
+                background-color: #0074D9;
+            }
+            to {
+                background-color: olive;
+            }
+        }
+       
         .self .datetime {
             text-align: right;
             color: dimgrey;

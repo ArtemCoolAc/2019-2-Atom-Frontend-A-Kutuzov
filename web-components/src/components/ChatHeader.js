@@ -19,6 +19,10 @@ template.innerHTML = `
             cursor: pointer;
         }
         
+        .headerClickableButton:hover {
+            opacity: 0.85;
+        }
+        
         .personProperties {
             display: flex;
             flex: auto;
@@ -42,11 +46,11 @@ template.innerHTML = `
         }
         
         .userFIOstatus .FIO {
-            font-size: 0.94em;
+            font-size: var(--fontNear);
         }
         
         .userFIOstatus .status {
-            font-size: 0.82em;
+            font-size: var(--fontMin);
             color: hotpink;
         }
         
@@ -55,19 +59,23 @@ template.innerHTML = `
             background-size: 100%;
             width: 40px;
         }
-
+        
         .searchButton{
             margin: 0;
             width: 40px;
             background: url(static/images/searching.webp) no-repeat center;
             background-size: 90%;          
         }
+        
+        .searchButton:hover {
+            opacity: 0.8;
+        }
 
         .optionsButton{
             background: url(static/images/opt.png) no-repeat center;
             background-size: 90%;
             width: 40px;
-        }    
+        }
                     
     </style>
     <div class="headerClickableButton returnBack"></div>

@@ -45,6 +45,11 @@ template.innerHTML = `
             width: 100%;
         }
         
+        message-shell .newMessage {
+            animation-name: newMessageAdding;
+            animation-duration: 0.5s;
+        }                    
+        
         .input-line {
             width: 100%;
             flex: auto;
@@ -118,7 +123,7 @@ class MessageForm extends HTMLElement {
     element.setAttribute('date', date);
   }
 
-  createNewMessage(messageText, messageOwner = 'self', messageStatus = 'unread') {
+  createNewMessage(messageText, messageOwner = 'self', messageStatus = 'unread', newMessage = false) {
     this.messageCounter = JSON.parse(localStorage.getItem('messageCounter')); // mesForm is earlier than Complex
     const datetime = new Date();
     const chatID = this.getAttribute('chatID');
@@ -132,10 +137,10 @@ class MessageForm extends HTMLElement {
       owner: messageOwner,
       status: messageStatus,
     };
-    this.insertLocalStorageData(MessageData);
+    this.insertLocalStorageData(MessageData, newMessage);
   }
 
-  insertLocalStorageData(MessageData) {
+  insertLocalStorageData(MessageData, newMessage = false) {
     const chatID = this.getAttribute('chatID');
     const data = JSON.parse(localStorage.getItem(`chat${chatID}`));
     data.push(MessageData);
@@ -143,10 +148,12 @@ class MessageForm extends HTMLElement {
     this.counter = Number.parseInt(this.counter, 10) + 1;
     this.messageCounter[chatID] = this.counter;
     localStorage.setItem('messageCounter', JSON.stringify(this.messageCounter));
-    this.insertMessage(MessageData);
+    this.insertMessage(MessageData, newMessage);
   }
 
-  insertMessage(messageData) {
+  insertMessage(messageData, newMessage = false) {
+    let anim = document.createElement('newMessage');
+    let animHtml = newMessage ? anim.innerHTML : '';
     this.$chat.innerHTML += `
         <message-shell
             ID="${messageData.ID}"

@@ -33,6 +33,10 @@ template.innerHTML = `
       float: left;
       cursor: pointer;
     }
+    
+    .menuClickableButton:hover {
+        opacity: 0.4;
+    }
   
     .headerLine .baseLine {
       float: left;
@@ -50,6 +54,10 @@ template.innerHTML = `
       background: url(static/images/searching.webp) no-repeat center;
       background-size: 90%;
       cursor: pointer;        
+    }
+    
+    .searchButton:hover {
+        opacity: 0.75;
     }
     
     .mainField {
@@ -71,6 +79,10 @@ template.innerHTML = `
       overflow: hidden;
     }
     
+    one-dialog:hover {
+      opacity: 0.7;
+    }
+    
     .buttonNewChat {
       position: absolute;
       bottom: 30px;
@@ -81,6 +93,30 @@ template.innerHTML = `
       cursor: pointer;
       background-color: red;    
       background-size: 30px;
+      -moz-transition: all 0.8s ease-in-out;
+      -webkit-transition: all 0.8s ease-in-out;
+      -o-transition: all 0.8s ease-in-out;
+      -ms-transition: all 0.8s ease-in-out;
+      transition: all 0.8s ease-in-out;
+    }
+    
+    .buttonNewChat:hover {
+      transition: 1s;
+      background-color: green;
+      opacity: 0.9;
+      -moz-transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+    
+    .buttonNewChat:active {
+      -moz-transform: rotate(-360deg);
+      -webkit-transform: rotate(-360deg);
+      -o-transform: rotate(-360deg);
+      -ms-transform: rotate(-360deg);
+      transform: rotate(-360deg);
     }
   
     .pencilParameters {

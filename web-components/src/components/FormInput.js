@@ -24,6 +24,10 @@ template.innerHTML = `
             margin: 0 15px;
         }
         
+        .interactButton:hover {
+            opacity: 0.8;
+        }
+        
         .AddFileButton {
             background: url(static/images/clip.png) center no-repeat;
             background-size: 90%;
@@ -33,6 +37,7 @@ template.innerHTML = `
             background: url(static/images/confirm_button.png) center no-repeat;
             background-size: 90%;
         }
+        
         
     </style>
     <div class="interactButton AddFileButton"></div>    
