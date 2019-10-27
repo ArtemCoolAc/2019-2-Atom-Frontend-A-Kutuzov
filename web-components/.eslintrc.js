@@ -19,7 +19,7 @@ module.exports = {
     "prefer-template": 1,
     "object-shorthand": 1,
     "no-restricted-globals": 1,
-    "no-plusplus": 1,
+    "no-plusplus": 0,
     "semi": 1,
     "default-case": 1,
     "no-case-declarations": 1
