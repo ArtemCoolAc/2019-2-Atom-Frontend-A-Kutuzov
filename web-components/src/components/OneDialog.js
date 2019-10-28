@@ -50,7 +50,7 @@ template.innerHTML = `
     }
   
     .lastSentMessageTime {
-      color: lime;
+      color: #061209;
       font-size: var(--fontMin);
       float: right;
     }

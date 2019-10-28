@@ -93,10 +93,6 @@ template.innerHTML = `
       cursor: pointer;
       background-color: red;    
       background-size: 30px;
-      -moz-transition: all 0.8s ease-in-out;
-      -webkit-transition: all 0.8s ease-in-out;
-      -o-transition: all 0.8s ease-in-out;
-      -ms-transition: all 0.8s ease-in-out;
       transition: all 0.8s ease-in-out;
     }
     
@@ -104,10 +100,6 @@ template.innerHTML = `
       transition: 1s;
       background-color: green;
       opacity: 0.9;
-      -moz-transform: rotate(360deg);
-      -webkit-transform: rotate(360deg);
-      -o-transform: rotate(360deg);
-      -ms-transform: rotate(360deg);
       transform: rotate(360deg);
     }
     

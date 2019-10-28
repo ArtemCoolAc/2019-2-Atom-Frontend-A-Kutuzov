@@ -45,10 +45,32 @@ template.innerHTML = `
             width: 100%;
         }
         
-        message-shell .newMessage {
+        message-shell.newMessage {
             animation-name: newMessageAdding;
             animation-duration: 0.5s;
-        }                    
+            transition: ease-in-out;
+        }
+        
+        @keyframes newMessageAdding {
+            0% {
+                max-height: 0;
+                opacity: 0;
+                padding: 0;
+            }
+            
+            50% {
+                background-color: lime;
+                max-height: 50%;
+                opacity: 0.5;
+                padding: 1px 3px 5px 5px;
+            }
+
+            100% {
+                max-height: 100%;
+                opacity: 1;
+                padding: 2px 5px 10px 10px;
+            }
+        }           
         
         .input-line {
             width: 100%;
@@ -93,7 +115,7 @@ class MessageForm extends HTMLElement {
 
   _onSubmit() {
     if (this.$input.value !== '') {
-      this.createNewMessage(this.$input.value);
+      this.createNewMessage(this.$input.value, 'self', 'unread', true);
       this.$input.setAttribute('value', '');
       this.dispatchEvent(new Event('updateList'));
     }
@@ -151,14 +173,16 @@ class MessageForm extends HTMLElement {
     this.insertMessage(MessageData, newMessage);
   }
 
-  insertMessage(messageData) {
-    this.$chat.innerHTML += `
-        <message-shell
-            ID="${messageData.ID}"
-            text="${messageData.text}"
-            time="${messageData.time}"
-            owner="${messageData.owner}" 
-        >''</message-shell>`;
+  insertMessage(messageData, newMessage) {
+    const message = document.createElement('message-shell');
+    this.$chat.appendChild(message);
+    message.setAttribute('ID', messageData.messageId);
+    message.setAttribute('text', messageData.text);
+    message.setAttribute('time', messageData.time);
+    message.setAttribute('owner', messageData.owner);
+    if (newMessage) {
+      message.classList.add('newMessage');
+    }
   }
 
   _onKeyPress(event) {

@@ -17,6 +17,7 @@ template.innerHTML = `
         .self {
             color: darkgreen;
             background-color: greenyellow;
+            transition: background-color 0.3s ease;
             float: right;
         }
         
@@ -27,17 +28,7 @@ template.innerHTML = `
         }
         
         .self:active {
-            animation-name: change-bg-color;
-            animation-duration: 0.5s;
-        }
-        
-        @keyframes change-bg-color {
-            from {
-                background-color: #0074D9;
-            }
-            to {
-                background-color: olive;
-            }
+            background-color: #0074D9;
         }
        
         .self .datetime {
