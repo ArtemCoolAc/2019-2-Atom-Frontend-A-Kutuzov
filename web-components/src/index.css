@@ -1,12 +1,13 @@
 :root {
-  --fontMin: 0.8em;
-  --fontNear: 0.95em;
-  --fontNormal: 1.1em;
-  --fontBig: 1.25em;
+  --fontMin: 0.8rem;
+  --fontNear: 0.95rem;
+  --fontNormal: 1.1rem;
+  --fontBig: 1.25rem;
 }
 
 html,
 body {
+  -webkit-tap-highlight-color: transparent;
   height: 100%;
   color: #FCE1E5;
   font-size: 1.05em;

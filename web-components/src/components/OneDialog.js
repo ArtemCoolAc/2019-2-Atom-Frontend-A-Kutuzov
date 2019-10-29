@@ -25,11 +25,12 @@ template.innerHTML = `
     }
     
     .avatar {
-      margin: 10px 10px;
+      margin: 10px 0 0 10px;
       border-radius: 50px;
       background-size: cover;
       width: 70px;
-      height: 70px;
+      min-width: 70px;
+      height: 70px;   
     }
     
     .dialogData{
@@ -136,7 +137,7 @@ class OneDialog extends HTMLElement {
   }
 
   addDate(date, time) {
-    const ourMonth = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+    const ourMonth = ['янв.', 'фев.', 'мар.', 'апр.', 'мая', 'июня', 'июля', 'авг.', 'сен.', 'окт.', 'нояб.', 'дек.'];
     const now = new Date();
     const current = `${now.getDate()} ${now.getMonth()} ${now.getFullYear()}`;
     const [day, month, year] = date.split(' ');
