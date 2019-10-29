@@ -16,6 +16,14 @@ template.innerHTML = `
       border: 1px solid grey;
     }
     
+    .dialog-form:hover {
+      background-color: green;
+    }
+    
+    .dialog-form:active {
+      background-color: yellow;
+    }
+    
     .avatar {
       margin: 10px 10px;
       border-radius: 50px;
@@ -36,14 +44,14 @@ template.innerHTML = `
     }
     
     .dialogOpponentName a {
-      font-size: 0.95em;
+      font-size: var(--fontNear);
       font-weight: bold;
       color: gold;
     }
   
     .lastSentMessageTime {
-      color: lime;
-      font-size: 0.8em;
+      color: #061209;
+      font-size: var(--fontMin);
       float: right;
     }
     
@@ -80,7 +88,7 @@ template.innerHTML = `
     .unreadMessagesQuantity {
       background-color: #497994;
       border-radius: 12px;
-      font-size: 0.8em;
+      font-size: var(--fontMin);
       text-align: center;
       font-weight: bold;
       color: #E2E3E5;

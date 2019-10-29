@@ -45,6 +45,33 @@ template.innerHTML = `
             width: 100%;
         }
         
+        message-shell.newMessage {
+            animation-name: newMessageAdding;
+            animation-duration: 0.5s;
+            transition: ease-in-out;
+        }
+        
+        @keyframes newMessageAdding {
+            0% {
+                max-height: 0;
+                opacity: 0;
+                padding: 0;
+            }
+            
+            50% {
+                background-color: lime;
+                max-height: 50%;
+                opacity: 0.5;
+                padding: 1px 3px 5px 5px;
+            }
+
+            100% {
+                max-height: 100%;
+                opacity: 1;
+                padding: 2px 5px 10px 10px;
+            }
+        }           
+        
         .input-line {
             width: 100%;
             flex: auto;
@@ -88,7 +115,7 @@ class MessageForm extends HTMLElement {
 
   _onSubmit() {
     if (this.$input.value !== '') {
-      this.createNewMessage(this.$input.value);
+      this.createNewMessage(this.$input.value, 'self', 'unread', true);
       this.$input.setAttribute('value', '');
       this.dispatchEvent(new Event('updateList'));
     }
@@ -118,7 +145,7 @@ class MessageForm extends HTMLElement {
     element.setAttribute('date', date);
   }
 
-  createNewMessage(messageText, messageOwner = 'self', messageStatus = 'unread') {
+  createNewMessage(messageText, messageOwner = 'self', messageStatus = 'unread', newMessage = false) {
     this.messageCounter = JSON.parse(localStorage.getItem('messageCounter')); // mesForm is earlier than Complex
     const datetime = new Date();
     const chatID = this.getAttribute('chatID');
@@ -132,10 +159,10 @@ class MessageForm extends HTMLElement {
       owner: messageOwner,
       status: messageStatus,
     };
-    this.insertLocalStorageData(MessageData);
+    this.insertLocalStorageData(MessageData, newMessage);
   }
 
-  insertLocalStorageData(MessageData) {
+  insertLocalStorageData(MessageData, newMessage = false) {
     const chatID = this.getAttribute('chatID');
     const data = JSON.parse(localStorage.getItem(`chat${chatID}`));
     data.push(MessageData);
@@ -143,17 +170,19 @@ class MessageForm extends HTMLElement {
     this.counter = Number.parseInt(this.counter, 10) + 1;
     this.messageCounter[chatID] = this.counter;
     localStorage.setItem('messageCounter', JSON.stringify(this.messageCounter));
-    this.insertMessage(MessageData);
+    this.insertMessage(MessageData, newMessage);
   }
 
-  insertMessage(messageData) {
-    this.$chat.innerHTML += `
-        <message-shell
-            ID="${messageData.ID}"
-            text="${messageData.text}"
-            time="${messageData.time}"
-            owner="${messageData.owner}" 
-        >''</message-shell>`;
+  insertMessage(messageData, newMessage) {
+    const message = document.createElement('message-shell');
+    this.$chat.appendChild(message);
+    message.setAttribute('ID', messageData.messageId);
+    message.setAttribute('text', messageData.text);
+    message.setAttribute('time', messageData.time);
+    message.setAttribute('owner', messageData.owner);
+    if (newMessage) {
+      message.classList.add('newMessage');
+    }
   }
 
   _onKeyPress(event) {

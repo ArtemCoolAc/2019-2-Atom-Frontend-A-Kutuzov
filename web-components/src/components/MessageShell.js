@@ -17,9 +17,20 @@ template.innerHTML = `
         .self {
             color: darkgreen;
             background-color: greenyellow;
+            transition: background-color 0.3s ease;
             float: right;
         }
         
+        .self:hover {
+            color: white;
+            background-color: purple;
+            cursor: pointer;
+        }
+        
+        .self:active {
+            background-color: #0074D9;
+        }
+       
         .self .datetime {
             text-align: right;
             color: dimgrey;

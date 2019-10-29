@@ -1,3 +1,10 @@
+:root {
+  --fontMin: 0.8em;
+  --fontNear: 0.95em;
+  --fontNormal: 1.1em;
+  --fontBig: 1.25em;
+}
+
 html,
 body {
   height: 100%;
