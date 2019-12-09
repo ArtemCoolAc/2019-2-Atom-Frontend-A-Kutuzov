@@ -80,7 +80,7 @@
     "lint": "npm run lint:js --fix && npm run lint:dup && npm run lint:js",
     "lint-fix": "eslint --fix",
     "clean": "rm -rf dist",
-    "test": "CI=true npm run test:engine && npm run test:unit && npm run lint",
+    "test": "CI=true npm run test:engine && npm run test:unit",
     "test:coverage": "npm test -- --coverage",
     "test:engine": "check-engine",
     "test:sec": "npm audit || true",
