@@ -44,7 +44,7 @@ export class Application extends React.Component {
     return (
       <Router>
         <Switch>
-          <Route path="/" exact>
+          <Route path="/2019-2-Atom-Frontend-A-Kutuzov" exact>
             <ControlChatList setActiveChat={this.setCurrentChat} />
           </Route>
           <Route path="/chat">
