@@ -6,11 +6,11 @@ export function UserProfile(props) {
   return (
     <div className={styles.sheet}>
       <div className={styles.toolBar}>
-        <Link to="/">
+        <Link to="/2019-2-Atom-Frontend-A-Kutuzov">
           <div className={styles.backButton} />
         </Link>
         <div className={styles.title}>Редактируем профиль</div>
-        <Link to={'/'}>
+        <Link to={'/2019-2-Atom-Frontend-A-Kutuzov'}>
           <div className={styles.confirm} />
         </Link>
       </div>
