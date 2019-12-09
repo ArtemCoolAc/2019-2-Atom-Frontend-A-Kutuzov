@@ -1,0 +1,82 @@
+.dialogWrap {
+  display: flex;
+  width: 100%;
+  height: 90px;
+  cursor: pointer;
+  background-color: salmon;
+  border: 1px solid grey;
+}
+
+.dialogWrap:hover {
+  background-color: green;
+}
+
+.dialogWrap:active {
+  background-color: yellow;
+}
+
+a {
+  text-decoration: none;
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding-left: 22px;
+  margin-top: 4px;
+}
+
+.dialogName {
+  width: 100%;
+  height: 40%;
+  text-align: left;
+  font-size: large;
+  color: yellow;
+  margin-top: 10px;
+}
+
+.dialogAvatar {
+  margin: 10px 0 0 10px;
+  border-radius: 50px;
+  background-size: cover;
+  width: 70px;
+  min-width: 70px;
+  height: 70px;
+  background: url('../static/images/Ava1.jpg') no-repeat;
+  background-size: cover;
+}
+
+.status {
+  float: right;
+  height: 100%;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+}
+
+.messageTime {
+  width: 100%;
+  height: 40%;
+  margin-left: 65%;
+  font-size: small;
+  padding: 15px;
+  color: black;
+}
+
+.lastMessage {
+  text-align: left;
+  width: 100%;
+  height: 60%;
+  color: wheat;
+}
+
+.messageStatus {
+  width: 100%;
+  height: 60%;
+  margin-left: 65%;
+  margin-right: 0;
+  padding: 10px;
+  color: #0074d9;
+}
