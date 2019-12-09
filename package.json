@@ -1,6 +1,6 @@
 {
 	"name": "atom-mail-2019-artemcoolac",
-	"homepage": "https://your_gh_login.github.io/your_repo_name",
+	"homepage": "https://ArtemCoolAc.github.io/2019-2-Atom-Frontend-A-Kutuzov2",
 	"description": "Mail.Ru Group Frontend Atom course, 2019",
 	"version": "0.1.0",
 	"author": "Artemcoolac",
@@ -8,7 +8,6 @@
 		"@emotion/core": "^10.0.22",
 		"@emotion/styled": "^10.0.22",
 		"cross-env": "^6.0.3",
-		"node-sass": "^4.13.0",
 		"prop-types": "^15.7.2",
 		"react": "^16.11.0",
 		"react-dom": "^16.11.0",
