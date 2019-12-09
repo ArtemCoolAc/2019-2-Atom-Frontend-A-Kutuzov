@@ -1,0 +1,42 @@
+.send {
+  height: 100%;
+  width: 30px;
+  margin: 0 15px;
+  cursor: pointer;
+  opacity: 0.85;
+  transition-duration: 0.15s;
+  width: 50px;
+  z-index: 1;
+  background: url('../images/confirm_button.png') no-repeat center center;
+  background-size: 90%;
+}
+
+.cancel {
+  height: 100%;
+  width: 30px;
+  margin: 0 15px;
+  cursor: pointer;
+  opacity: 0.85;
+  transition-duration: 0.15s;
+  width: 50px;
+  z-index: 1;
+  background: url('../images/cancel.webp') no-repeat center center;
+  background-size: 70%;
+  border: none;
+  outline: none;
+}
+
+.mic {
+  height: 100%;
+  width: 30px;
+  margin: 0 15px;
+  cursor: pointer;
+  opacity: 0.85;
+  transition-duration: 0.15s;
+  width: 50px;
+  z-index: 1;
+  background: url('../images/micro.png') no-repeat center center;
+  background-size: 60%;
+  border: none;
+  outline: none;
+}

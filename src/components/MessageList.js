@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../styles/MessageList.module.css'
+import styles from '../static/styles/MessageList.module.css'
 import { MessageBox } from './MessageBox'
 
 export function MessageList(props) {

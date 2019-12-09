@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import styles from '../styles/DialogBox.module.css'
+import styles from '../static/styles/DialogBox.module.css'
 
 export function DialogBox(props) {
   const { boxInfo, setActiveChat } = props

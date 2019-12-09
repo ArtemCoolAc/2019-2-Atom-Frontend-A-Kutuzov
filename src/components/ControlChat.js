@@ -2,7 +2,7 @@ import React from 'react'
 import { HeaderChat } from './HeaderChat'
 import { MessageList } from './MessageList'
 import { FormInput } from './FormInput'
-import styles from '../styles/ControlChat.module.css'
+import styles from '../static/styles/ControlChat.module.css'
 
 export class ControlChat extends React.Component {
   constructor(props) {
