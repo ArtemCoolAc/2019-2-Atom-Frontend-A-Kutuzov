@@ -1,13 +1,10 @@
 language: node_js
 node_js:
-  - "stable"
-
-before_install:
-  - cd web-components
+  - 'stable'
 
 cache:
   directories:
-  - node_modules
+    - node_modules
 script:
   - npm run test
   - npm run build
