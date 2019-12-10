@@ -1,4 +1,4 @@
-import convertBytesToHuman from '../../convertBytesToHuman'
+import convertBytesToHuman from '../../convertBytesToHuman';
 
 /*
  * Необходимо покрыть все возможные
@@ -29,3 +29,4 @@ test('Возвращает корректное значение для чисе
   expect(convertBytesToHuman(9192465624498)).toBe('8.360 TB')
   expect(convertBytesToHuman(23534464363458784)).toBe('20.903 PB')
 })
+

@@ -1,26 +1,2 @@
-Structure of programm
---Application
-|
-|--ManageChatList
-| |
-| |--HeaderDialogList
-| |
-| |--ChatList
-| | |
-| | |--DialogBox
-| |
-| |--ButtonNewChat
-|
-|--ManagerChat
-| |
-| |--HeaderChat
-| |
-| |--MessageList
-| | |
-| | |--MessageBox
-| |
-| |--FormInput
-| |
-| |--SendButton
-|
-|--UserProfile
+2019-2-Atom-Frontend-A-Kutuzov
+
