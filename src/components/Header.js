@@ -19,7 +19,6 @@ const TopBar = styled.div`
   height: 150px;
   padding: 20px;
   color: #fff;
-
   .redux-logo {
     animation: ${rotate360} infinite 20s linear;
     height: 80px;
