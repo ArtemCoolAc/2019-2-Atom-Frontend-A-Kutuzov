@@ -1,0 +1,60 @@
+.dialogWrap {
+	width: 100%;
+	height: 100px;
+	display: inline-block;
+	text-align: center;
+	word-break: break-all;
+	float: left;
+	color: black;
+	box-sizing: border-box;
+	border: 1px solid black;
+	padding: 10px;
+	background-color: salmon;
+	cursor: pointer;
+
+	&:hover,
+	&:focus {
+		background-color: rgb(0, 102, 0);
+	}
+
+	& .dialogName {
+		width: 50%;
+		height: 20px;
+		padding-left: 20%;
+		text-align: left;
+		font-size: small;
+	}
+
+	& .dialogAvatar {
+		display: inline-block;
+		float: left;
+		width: 60px;
+		height: 60px;
+		margin: 0;
+		border-radius: 30px;
+		background: url('../static/images/Ava1.jpg') no-repeat;
+		background-size: 100%;
+	}
+
+	& .messageTime {
+		width: 60px;
+		height: 20px;
+		text-align: right;
+		font-size: small;
+		margin-top: 5px;
+		margin-bottom: 5px;
+		float: right;
+	}
+
+	& .lastMessage {
+		width: 100%;
+		height: 40px;
+		padding-left: 100px;
+		padding-right: 60px;
+		text-align: left;
+	}
+
+	& .messageStatus {
+		float: right;
+	}
+}

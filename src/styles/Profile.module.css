@@ -1,0 +1,102 @@
+.paper {
+	height: 100%;
+	width: 100%;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+}
+
+.toolBar {
+	display: flex;
+	flex-direction: row;
+	align-content: flex-start;
+	width: 100%;
+	height: 60px;
+	background-color: rgb(142, 36, 170);
+	box-shadow: 0 0 4px 0 rgb(19, 19, 19);
+}
+
+.backButton {
+	height: 100%;
+	width: 60px;
+	padding: 4px;
+	cursor: pointer;
+	background-size: 70%;
+}
+
+.title {
+	display: flex;
+	height: 100%;
+	width: 100%;
+	font-size: 18px;
+	color: white;
+	align-items: center;
+	padding-left: 30px;
+}
+
+.ok {
+	height: 100%;
+	width: 60px;
+	cursor: pointer;
+	background: url(http://simpleicon.com/wp-content/uploads/ok.png) no-repeat
+		center center;
+	background-size: 70%;
+}
+
+.avatar {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	width: 100px;
+	height: 100px;
+	border-radius: 100px;
+	background: url(https://www.freepngimg.com/thumb/face/8-will-smith-face-png-image.png)
+		no-repeat center center;
+	background-size: 70%;
+	border: 1px solid rgb(217, 217, 217);
+	z-index: 2;
+}
+
+.Box {
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+	height: 80px;
+	background-color: rgb(230, 230, 230);
+	border-bottom: 4px solid rgb(166, 166, 166);
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+	margin-bottom: 50px;
+}
+
+.extra {
+	padding-top: 6px;
+	background: transparent;
+	font-size: 12px;
+	color: rgb(140, 140, 140);
+	padding-left: 20px;
+}
+
+.info {
+	background: transparent;
+	font-size: 14px;
+	color: rgb(140, 140, 140);
+	padding-top: 6px;
+	padding-left: 20px;
+}
+
+.customInput {
+	font-size: 14px;
+
+	/* color: #373434; */
+	display: block;
+	background: transparent;
+	flex: auto;
+	height: 70%;
+	width: 100%;
+	padding: 10px;
+	padding-left: 20px;
+	border: none;
+	flex: auto;
+}
