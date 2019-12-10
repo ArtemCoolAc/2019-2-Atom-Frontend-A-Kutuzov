@@ -27,7 +27,7 @@
 .additionalButton {
   height: 100%;
   width: 30px;
-  background: url('../static/images/clip.png') no-repeat center;
+  background: url('../images/clip.png') no-repeat center;
   background-size: 100%;
   z-index: 1;
 }

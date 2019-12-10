@@ -1,16 +1,20 @@
-import React from 'react';
-import styles from '../styles/ButtonNewChat.module.css';
+import React from 'react'
+import styles from '../static/styles/ButtonNewChat.module.css'
 
 export function ButtonNewChat(props) {
-	function onClick(event) {
-		event.preventDefault();
-		const nameChat = prompt('С кем будем чатиться?', 'Мартин');
-		props.createChat(nameChat);
-	}
+  const { createChat } = props
 
-	return (
-		<div className={styles.buttonNew} onClick={onClick}>
-			<div className={styles.pen} />
-		</div>
-	);
+  function handleClick(event) {
+    const nameChat = prompt('Введите имя чата', 'NewChat')
+    const userName = prompt('Имя пользователя, с которым ведем диалог', '')
+    if (userName) {
+      createChat(nameChat, userName)
+    }
+  }
+
+  return (
+    <div className={styles.buttonNew} onClick={handleClick}>
+      <div className={styles.pen} />
+    </div>
+  )
 }

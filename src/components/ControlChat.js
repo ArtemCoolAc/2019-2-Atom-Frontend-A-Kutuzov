@@ -1,67 +1,135 @@
-import React from 'react';
-import { HeaderChat } from './HeaderChat';
-import { MessageList } from './MessageList';
-import { FormInput } from './FormInput';
-import styles from '../styles/ControlChat.module.css';
+import React from 'react'
+import { HeaderChat } from './HeaderChat'
+import { MessageList } from './MessageList'
+import { FormInput } from './FormInput'
+import styles from '../static/styles/ControlChat.module.css'
 
 export class ControlChat extends React.Component {
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props)
 
-		const messages = this.parseDataDB();
+    const info = this.parseData()
 
-		this.state = {
-			messageMap: messages.messageMap,
-		};
+    this.state = {
+      messageMap: info.messageMap,
+      activeChat: props.activeChat,
+      setVisibleDropZone: false,
+      dropFiles: [],
+    }
 
-		this.sendMessage = this.sendMessage.bind(this);
-	}
+    this.sendMessage = this.sendMessage.bind(this)
+    this.triggerDropZone = this.triggerDropZone.bind(this)
+    this.dragOver = this.dragOver.bind(this)
+    this.dragLeave = this.dragLeave.bind(this)
+    this.drop = this.drop.bind(this)
+  }
 
-	parseDataDB() {
-		let messages;
-		try {
-			messages = {
-				messageMap: JSON.parse(localStorage.getItem('messageMap')),
-			};
-		} catch (Error) {
-			localStorage.clear();
-			console.log('Getting error while parsing local storage');
-			messages = {
-				messageMap: null,
-			};
-		}
+  componentDidUpdate(prevProps) {
+    if (this.props.activeChat !== prevProps.activeChat) {
+      this.setState({
+        activeChat: this.props.activeChat,
+      })
+    }
+  }
 
-		return messages;
-	}
+  parseData() {
+    let data
+    try {
+      data = {
+        messageMap: JSON.parse(localStorage.getItem('messageMap')),
+      }
+    } catch (Error) {
+      localStorage.clear()
+      console.log('Error local storage')
+      data = {
+        messageMap: null,
+      }
+    }
 
-	sendMessage(message) {
-		// eslint-disable-next-line
-		const { messageMap, activeChat } = this.state;
+    return data
+  }
 
-		if (this.props.currentChat !== null) {
-			messageMap[this.props.currentChat].push({
-				id: messageMap[this.props.currentChat].length,
-				content: message,
-				time: new Date().getTime(),
-			});
-			this.setState({ messageMap });
+  triggerDropZone(status) {
+    this.setState({ setVisibleDropZone: status })
+  }
 
-			localStorage.setItem('messageMap', JSON.stringify(messageMap));
-		}
-	}
+  dragOver(event) {
+    event.preventDefault()
+    event.stopPropagation()
 
-	render() {
-		const { messageMap } = this.state;
+    this.triggerDropZone(true)
+  }
 
-		return (
-			<div className={styles.wrap} style={this.props.displayChat}>
-				<HeaderChat closeChat={this.props.closeChat} />
-				<MessageList
-					messageList={messageMap}
-					activeChat={this.props.currentChat}
-				/>
-				<FormInput sendMessage={this.sendMessage} />
-			</div>
-		);
-	}
+  dragLeave(event) {
+    this.triggerDropZone(false)
+  }
+
+  drop(event) {
+    event.preventDefault()
+    event.stopPropagation()
+
+    this.triggerDropZone(false)
+
+    const attachment = {
+      name: 'drop',
+      type: 'image',
+      path: [window.URL.createObjectURL(event.dataTransfer.files[0])],
+    }
+    this.sendMessage(null, attachment)
+  }
+
+  sendMessage(message, newAttachment = null) {
+    const { messageMap, activeChat } = this.state
+
+    let date = new Date(parseInt(new Date().getTime(), 10))
+    date = date
+      .toString()
+      .split(' ')[4]
+      .split(':')
+
+    if (activeChat >= 0 && (message || newAttachment)) {
+      if (messageMap[activeChat]) {
+        messageMap[activeChat] = [
+          ...messageMap[activeChat],
+          {
+            id: messageMap[activeChat].length + 2,
+            attachment: newAttachment,
+            owner: 'self',
+            text: message,
+            time: `${date[0]}:${date[1]}`,
+          },
+        ]
+        this.setState({ messageMap })
+      } else {
+        const map = [
+          ...messageMap,
+          [
+            {
+              id: 1,
+              attachment: newAttachment,
+              owner: 'self',
+              text: message,
+              time: `${date[0]}:${date[1]}`,
+            },
+          ],
+        ]
+
+        this.setState({ messageMap: map })
+      }
+
+      localStorage.setItem('messageMap', JSON.stringify(messageMap))
+    }
+  }
+
+  render() {
+    const { messageMap, activeChat } = this.state
+
+    return (
+      <div className={styles.wrap} onDrop={this.drop} onDragOver={this.dragOver} onDragLeave={this.dragLeave}>
+        <HeaderChat />
+        <MessageList messageMap={messageMap} activeChat={activeChat} />
+        <FormInput sendMessage={this.sendMessage} />
+      </div>
+    )
+  }
 }

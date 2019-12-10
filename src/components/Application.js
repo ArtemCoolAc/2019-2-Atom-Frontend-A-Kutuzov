@@ -1,63 +1,58 @@
-import React from 'react';
-import { ControlChatList } from './ControlChatList';
-import { ControlChat } from './ControlChat';
-import { FakeData } from './FakeData';
+import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { ControlChatList } from './ControlChatList'
+import { ControlChat } from './ControlChat'
+import { UserProfile } from './Profile'
+import { FakeData } from './FakeData'
 
 export class Application extends React.Component {
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props)
 
-		this.state = {
-			activeChat: null,
-			animations: {
-				displayMenu: {
-					display: 'block',
-				},
-				displayChat: {
-					display: 'none',
-				},
-			},
-		};
+    this.state = {
+      activeChat: null,
+    }
 
-		this.openChat = this.openChat.bind(this);
-		this.closeChat = this.closeChat.bind(this);
+    this.setCurrentChat = this.setCurrentChat.bind(this)
 
-		FakeData();
-	}
+    FakeData()
+  }
 
-	openChat(currentChatId) {
-		const { state } = this;
-		state.activeChat = currentChatId;
-		state.animations.displayMenu = { display: 'none' };
-		state.animations.displayChat = { display: 'block' };
+  componentDidMount() {
+    try {
+      const json = localStorage.getItem('activeChat')
+      const chatId = JSON.parse(json)
 
-		this.setState(state);
-	}
+      if (chatId >= 0) {
+        this.setState({
+          activeChat: chatId,
+        })
+      }
+    } catch (Error) {
+      localStorage.clear()
+    }
+  }
 
-	closeChat() {
-		const { state } = this;
-		state.activeChat = null;
-		state.animations.displayMenu = { display: 'block' };
-		state.animations.displayChat = { display: 'none' };
+  setCurrentChat(id) {
+    this.setState({ activeChat: id })
+    localStorage.setItem('activeChat', JSON.stringify(id))
+  }
 
-		this.setState(state);
-	}
+  render() {
+    const { activeChat } = this.state
 
-	render() {
-		const { activeChat: currentChat, animations } = this.state;
-
-		return (
-			<div>
-				<ControlChatList
-					displayMenu={animations.displayMenu}
-					openChat={this.openChat}
-				/>
-				<ControlChat
-					displayChat={animations.displayChat}
-					currentChat={currentChat}
-					closeChat={this.closeChat}
-				/>
-			</div>
-		);
-	}
+    return (
+      <Router>
+        <Switch>
+          <Route path="/2019-2-Atom-Frontend-A-Kutuzov" exact>
+            <ControlChatList setActiveChat={this.setCurrentChat} />
+          </Route>
+          <Route path="/chat">
+            <ControlChat activeChat={activeChat} />
+          </Route>
+          <Route path="/profile" component={UserProfile} />
+        </Switch>
+      </Router>
+    )
+  }
 }

@@ -31,8 +31,10 @@ template.innerHTML = `
       }
     }
     
-    message-form .closing {
+    message-form.closing {
       animation-name: dialogDisappearance;
+      animation-duration: 1s;
+      transition: ease;
     }
     
     @keyframes dialogDisappearance {

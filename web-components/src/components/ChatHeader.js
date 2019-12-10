@@ -37,21 +37,24 @@ template.innerHTML = `
             border-radius: 25px;
             margin-right: 15px;
             height: 40px;
+            min-width: 40px;
             width: 40px;
         }
         
         .personProperties .userFIOstatus {
-            padding-top: 4px;
+            /*padding-top: 4px;*/
             height: 100%;
         }
         
         .userFIOstatus .FIO {
+            text-align: left;
             font-size: var(--fontNear);
         }
         
         .userFIOstatus .status {
             font-size: var(--fontMin);
             color: hotpink;
+            text-align: left;
         }
         
         .returnBack{

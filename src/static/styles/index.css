@@ -12,8 +12,7 @@ body {
   margin: 0;
   background-position-x: center;
   background-position-y: center;
-  /*background-image: url(https://wallpaperaccess.com/full/186461.jpg);*/
-  background: url('../static/images/background_blue.png');
+  background: url('../images/background_blue.png');
   background-color: #373338;
   background-size: 200%;
   font-size: 15px;

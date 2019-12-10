@@ -1,31 +1,26 @@
-import React from 'react';
-import { DialogBox } from './DialogBox';
-import styles from '../styles/ChatList.module.css';
+import React from 'react'
+import { DialogBox } from './DialogBox'
+import styles from '../static/styles/ChatList.module.css'
 
 export function ChatList(props) {
-	const list = [];
-	let counter = 0;
-	const { chatList, setActiveChat } = props;
+  const list = []
+  let counter = 0
+  const { chatList, setActiveChat } = props
 
-	if (!chatList) {
-		list.push(<div className={styles.noMessage}>Нет чатиков</div>);
-	} else {
-		chatList.forEach((item) => {
-			const Chat = (
-				<DialogBox
-					key={counter++}
-					boxInfo={item}
-					setActiveChat={setActiveChat}
-					openChat={props.openChat}
-				/>
-			);
-			list.push(Chat);
-		});
-	}
+  if (!chatList) {
+    list.push(<div className={styles.noMessage}>Нет чатиков(:</div>)
+  } else {
+    // eslint-disable-next-line
+    chatList.map((item) => {
+      const Chat = <DialogBox key={counter++} boxInfo={item} setActiveChat={setActiveChat} />
 
-	return (
-		<div>
-			<div className={styles.wrap}>{list}</div>
-		</div>
-	);
+      list.push(Chat)
+    })
+  }
+
+  return (
+    <div>
+      <div className={styles.wrap}>{list}</div>
+    </div>
+  )
 }
