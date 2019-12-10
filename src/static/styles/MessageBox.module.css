@@ -3,18 +3,40 @@
   border-radius: 15px;
   padding: 10px;
   margin: 5px 0 5px 0;
+  /*min-width: 20%;*/
   max-width: 40%;
   word-wrap: break-word;
   background-color: yellowgreen;
   padding: 0 10px 0 10px;
   animation-name: smoothDrop;
   animation-duration: 0.25s;
-  animation-timing-function: ease-in-out;
-  animation-fill-mode: forwards;
+  /*animation-timing-function: ease-in-out;*/
+  /*animation-fill-mode: forwards;*/
+  -webkit-transition: all 0.5s linear;
+  -moz-transition: all 0.5s linear;
+  -o-transition: all 0.5s linear;
+  transition: all 0.5s linear;
+  -moz-box-shadow: 2px 2px 4px 0px #006773;
+  -webkit-box-shadow: 2px 2px 4px 0px #006773;
+  box-shadow: 2px 2px 4px 0px #006773;
+  -moz-border-radius: 15px 15px 15px 15px;
+  -webkit-border-radius: 15px 15px 15px 15px;
+  border-radius: 15px 15px 15px 15px;
+}
+
+.messageBox:hover,
+.messageBox:focus,
+.messageBox:active {
+  -webkit-box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .messageBox:hover {
-  background-color: #8e24aa;
+  background-color: greenyellow;
 }
 
 .messageBox:active {
@@ -44,13 +66,35 @@
   color: black;
 }
 
+audio:hover,
+audio:focus,
+audio:active {
+  -webkit-box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
 audio {
   display: block;
-  padding-top: 5px;
+  /*padding-top: 15px;*/
   width: 100%;
-  size: 70%;
+  /*size: 70%;*/
   /*min-width: 70%;*/
   outline: none;
+  -webkit-transition: all 0.5s linear;
+  -moz-transition: all 0.5s linear;
+  -o-transition: all 0.5s linear;
+  transition: all 0.5s linear;
+  -moz-box-shadow: 2px 2px 4px 0px #006773;
+  -webkit-box-shadow: 2px 2px 4px 0px #006773;
+  box-shadow: 2px 2px 4px 0px #006773;
+  -moz-border-radius: 15px 15px 15px 15px;
+  -webkit-border-radius: 15px 15px 15px 15px;
+  border-radius: 15px 15px 15px 15px;
+  background-color: white;
 }
 
 a {
@@ -60,4 +104,10 @@ a {
 
 .img {
   text-align: center;
+}
+
+.Box {
+  padding-right: 25px;
+  padding-top: 10px;
+  width: 40vw;
 }

@@ -8,7 +8,11 @@ export function ChatList(props) {
   const { chatList, setActiveChat } = props
 
   if (!chatList) {
-    list.push(<div className={styles.noMessage}>Нет чатиков(:</div>)
+    list.push(
+      <div key={counter} className={styles.noMessage}>
+        Нет чатиков
+      </div>,
+    )
   } else {
     // eslint-disable-next-line
     chatList.map((item) => {

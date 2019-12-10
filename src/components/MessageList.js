@@ -3,7 +3,7 @@ import styles from '../static/styles/MessageList.module.css'
 import { MessageBox } from './MessageBox'
 
 export function MessageList(props) {
-  const { messageMap, activeChat } = props
+  const { messageMap, activeChat, isAudio } = props
   const list = []
   let iter = 1
 
@@ -13,7 +13,7 @@ export function MessageList(props) {
       if (item.owner === 'self') {
         const Message = (
           <div className={styles.messageBox} key={iter++}>
-            <MessageBox shift="self" content={item} />
+            <MessageBox shift="self" content={item} isAudio={isAudio} />
           </div>
         )
         list.push(Message)

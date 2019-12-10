@@ -15,6 +15,7 @@ export class ControlChat extends React.Component {
       activeChat: props.activeChat,
       setVisibleDropZone: false,
       dropFiles: [],
+      isAudio: false,
     }
 
     this.sendMessage = this.sendMessage.bind(this)
@@ -78,7 +79,7 @@ export class ControlChat extends React.Component {
     this.sendMessage(null, attachment)
   }
 
-  sendMessage(message, newAttachment = null) {
+  sendMessage(message, newAttachment = null, isAudio = false) {
     const { messageMap, activeChat } = this.state
 
     let date = new Date(parseInt(new Date().getTime(), 10))
@@ -99,7 +100,8 @@ export class ControlChat extends React.Component {
             time: `${date[0]}:${date[1]}`,
           },
         ]
-        this.setState({ messageMap })
+
+        this.setState({ messageMap, isAudio: isAudio })
       } else {
         const map = [
           ...messageMap,
@@ -122,12 +124,12 @@ export class ControlChat extends React.Component {
   }
 
   render() {
-    const { messageMap, activeChat } = this.state
+    const { messageMap, activeChat, isAudio } = this.state
 
     return (
       <div className={styles.wrap} onDrop={this.drop} onDragOver={this.dragOver} onDragLeave={this.dragLeave}>
         <HeaderChat />
-        <MessageList messageMap={messageMap} activeChat={activeChat} />
+        <MessageList messageMap={messageMap} activeChat={activeChat} isAudio={isAudio} />
         <FormInput sendMessage={this.sendMessage} />
       </div>
     )
