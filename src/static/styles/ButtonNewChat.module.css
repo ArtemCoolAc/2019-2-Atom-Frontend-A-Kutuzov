@@ -1,35 +1,31 @@
 .buttonNew {
-  position: absolute;
-  bottom: 30px;
-  right: 30px;
-  width: 60px;
-  height: 60px;
-  border-radius: 30px;
-  cursor: pointer;
-  background-color: red;
-  background-size: 30px;
-  transition: all 0.8s ease-in-out;
+	position: absolute;
+	bottom: 30px;
+	right: 30px;
+	width: 60px;
+	height: 60px;
+	border-radius: 30px;
+	cursor: pointer;
+	background-color: red;
+	background-size: 30px;
+	transition: all 0.8s ease-in-out;
 }
 
 .buttonNew:hover {
-  transition: 1s;
-  background-color: green;
-  opacity: 0.9;
-  transform: rotate(360deg);
+	transition: 1s;
+	background-color: green;
+	opacity: 0.9;
+	transform: rotate(360deg);
 }
 
 .buttonNew:active {
-  -moz-transform: rotate(-360deg);
-  -webkit-transform: rotate(-360deg);
-  -o-transform: rotate(-360deg);
-  -ms-transform: rotate(-360deg);
-  transform: rotate(-360deg);
+	transform: rotate(-360deg);
 }
 
 .pen {
-  background: url('../images/new1.png') no-repeat center;
-  background-size: 30px;
-  width: 30px;
-  height: 60px;
-  margin: auto;
+	background: url('../images/new1.png') no-repeat center;
+	background-size: 30px;
+	width: 30px;
+	height: 60px;
+	margin: auto;
 }

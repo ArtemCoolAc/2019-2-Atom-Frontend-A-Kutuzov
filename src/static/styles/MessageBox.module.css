@@ -1,113 +1,86 @@
 .messageBox {
-  box-sizing: border-box;
-  border-radius: 15px;
-  padding: 10px;
-  margin: 5px 0 5px 0;
-  /*min-width: 20%;*/
-  max-width: 40%;
-  word-wrap: break-word;
-  background-color: yellowgreen;
-  padding: 0 10px 0 10px;
-  animation-name: smoothDrop;
-  animation-duration: 0.25s;
-  /*animation-timing-function: ease-in-out;*/
-  /*animation-fill-mode: forwards;*/
-  -webkit-transition: all 0.5s linear;
-  -moz-transition: all 0.5s linear;
-  -o-transition: all 0.5s linear;
-  transition: all 0.5s linear;
-  -moz-box-shadow: 2px 2px 4px 0px #006773;
-  -webkit-box-shadow: 2px 2px 4px 0px #006773;
-  box-shadow: 2px 2px 4px 0px #006773;
-  -moz-border-radius: 15px 15px 15px 15px;
-  -webkit-border-radius: 15px 15px 15px 15px;
-  border-radius: 15px 15px 15px 15px;
+	box-sizing: border-box;
+	border-radius: 15px;
+	padding: 10px;
+	margin: 5px 0 5px 0;
+	max-width: 70%;
+	word-wrap: break-word;
+	background-color: yellowgreen;
+	padding: 0 10px 0 10px;
+	animation-name: smoothDrop;
+	animation-duration: 0.25s;
+	transition: all 0.5s linear;
+	box-shadow: 2px 2px 4px 0px #006773;
+	border-radius: 15px 15px 15px 15px;
 }
 
 .messageBox:hover,
 .messageBox:focus,
 .messageBox:active {
-  -webkit-box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
-  box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
-  -webkit-transform: scale(1.05);
-  -moz-transform: scale(1.05);
-  transform: scale(1.05);
+	box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
+	transform: scale(1.05);
 }
 
 .messageBox:hover {
-  background-color: greenyellow;
+	background-color: greenyellow;
 }
 
 .messageBox:active {
-  background-color: greenyellow;
+	background-color: greenyellow;
 }
 
 @keyframes smoothDrop {
-  from {
-    transform: translate(-100%) scaleX(0);
-  }
-  to {
-    transform: translate(0) scaleX(1);
-  }
+	from {
+		transform: translate(-100%) scaleX(0);
+	}
+	to {
+		transform: translate(0) scaleX(1);
+	}
 }
 
 .messageBox .time {
-  width: 100%;
-  text-align: right;
-  padding-top: 5px;
-  color: black;
-  font-size: small;
+	width: 100%;
+	text-align: right;
+	padding-top: 5px;
+	color: black;
+	font-size: small;
 }
 
 .messageBox .text {
-  padding-top: 5px;
-  text-align: left;
-  color: black;
+	padding-top: 5px;
+	text-align: left;
+	color: black;
+	word-break: break-word;
 }
 
 audio:hover,
 audio:focus,
 audio:active {
-  -webkit-box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
-  box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
-  -webkit-transform: scale(1.05);
-  -moz-transform: scale(1.05);
-  transform: scale(1.05);
+	box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
+	transform: scale(1.05);
 }
 
 audio {
-  display: block;
-  /*padding-top: 15px;*/
-  width: 100%;
-  /*size: 70%;*/
-  /*min-width: 70%;*/
-  outline: none;
-  -webkit-transition: all 0.5s linear;
-  -moz-transition: all 0.5s linear;
-  -o-transition: all 0.5s linear;
-  transition: all 0.5s linear;
-  -moz-box-shadow: 2px 2px 4px 0px #006773;
-  -webkit-box-shadow: 2px 2px 4px 0px #006773;
-  box-shadow: 2px 2px 4px 0px #006773;
-  -moz-border-radius: 15px 15px 15px 15px;
-  -webkit-border-radius: 15px 15px 15px 15px;
-  border-radius: 15px 15px 15px 15px;
-  background-color: white;
+	display: block;
+	width: 100%;
+	outline: none;
+	transition: all 0.5s linear;
+	box-shadow: 2px 2px 4px 0px #006773;
+	border-radius: 15px 15px 15px 15px;
+	background-color: white;
 }
 
 a {
-  padding-top: 10px;
-  text-align: justify;
+	padding-top: 10px;
+	text-align: justify;
 }
 
 .img {
-  text-align: center;
+	text-align: center;
 }
 
 .Box {
-  padding-right: 25px;
-  padding-top: 10px;
-  width: 40vw;
+	padding-right: 5px;
+	padding-top: 10px;
+	width: 40vw;
 }
