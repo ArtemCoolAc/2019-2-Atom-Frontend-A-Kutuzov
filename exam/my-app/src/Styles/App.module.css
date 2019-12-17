@@ -1,0 +1,22 @@
+.sheet {
+  width: 100vw;
+  height: 100vh;
+  background-color: #0074D9;
+  overflow-y: auto;
+}
+
+.header {
+  width: 100%;
+  height: 20%;
+  background-color: #8E24AA;
+  text-align: center;
+}
+
+.item {
+  margin: 20px;
+  padding: 10px 10px 10px 10px;
+  width: 90%;
+  height: 20%;
+  border-radius: 15px;
+  background-color: white;
+}
