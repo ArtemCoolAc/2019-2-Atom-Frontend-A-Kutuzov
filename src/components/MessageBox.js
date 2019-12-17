@@ -11,10 +11,19 @@ export function MessageBox(props) {
     style = { float: 'left' }
   }
 
+  //let isAudio = true;
+  /*if (isAudio) {
+    style.width = '40%';
+  }*/
+
   return (
     <div className={styles.messageBox} style={style}>
       {!content.attachment && <div className={styles.text}>{content.text}</div>}
-      {content.attachment && content.attachment.type === 'audio' && <audio src={content.attachment.path[0]} controls />}
+      {content.attachment && content.attachment.type === 'audio' && (
+        <div className={styles.Box}>
+          <audio src={content.attachment.path[0]} controls />
+        </div>
+      )}
       {content.attachment && content.attachment.type === 'document' && (
         <a href={content.attachment.path[0]}>{content.attachment.name}</a>
       )}

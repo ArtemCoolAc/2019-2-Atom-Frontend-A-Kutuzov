@@ -35,10 +35,7 @@ export class ControlChatList extends React.Component {
     const { chatList } = this.state
 
     let date = new Date(parseInt(new Date().getTime(), 10))
-    date = date
-      .toString()
-      .split(' ')[4]
-      .split(':')
+    date = `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
 
     this.setState({
       chatList: [

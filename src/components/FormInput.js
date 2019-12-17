@@ -24,7 +24,7 @@ export function FormInput(props) {
         type: 'audio',
         path: audioURL,
       }
-      sendMessage(null, object)
+      sendMessage(null, object, true)
     }
   }
 

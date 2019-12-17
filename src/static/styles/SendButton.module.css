@@ -20,7 +20,7 @@
   transition-duration: 0.15s;
   width: 50px;
   z-index: 1;
-  background: url('../images/cancel.webp') no-repeat center center;
+  background: url('../images/cancel.png') no-repeat center center;
   background-size: 70%;
   border: none;
   outline: none;
