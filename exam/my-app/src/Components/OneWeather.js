@@ -1,17 +1,19 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from '../Styles/OneWeather.module.css';
+import useFetch from 'react-fetch-hook';
+import { TwoWeather } from './TwoWeather';
 
 export function OneWeather(props) {
-  return (
-    <div>
-      <div className={styles.info}>
-        <div className={styles.text}>Москва</div>
-        <div className={styles.icon}>2</div>
-      </div>
-      <div className={styles.advanced}>
-        <div className={styles.parameters}>Влажность: 70%| Ветер: с-з 3м/с</div>
-        <div className={styles.temp}>1-2</div>
-      </div>
-    </div>
+  console.log(props);
+  if (props.current) {console.log(true)};
+
+  const API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${props.city}&lang=ru&appid=`;
+  const API_KEY = `351df42bd0c357994a143097e4ebcd70`;
+  const {isLoading, data} = useFetch(`${API_URL}${API_KEY}`);
+
+  return  isLoading ? (
+    <div>Loading...</div>
+  ) : (
+    <TwoWeather {...data} num={0}/>
   )
 }

@@ -1,36 +1,59 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import logo from '../logo.svg';
 import '../App.css';
 import styles from '../Styles/App.module.css'
 import {OneWeather} from './OneWeather';
 import {NewCity} from './NewCity';
+import {DetailedWeather} from './DetailedForecast';
 
+function App() {
+  const [state, setState] = useState(10);
 
-function App(props) {
+  let results = [];
   let list = [];
-  for (let i = 0; i < 10; ++i) {
-    list.push(<div className={styles.item}><OneWeather/></div> );
+
+  // let position = window.navigator.geolocation.getCurrentPosition(pos => {position = pos});
+
+  function onClick(event) {
+    const city = prompt('Введите название города');
+    list.push(<div className={styles.item}><OneWeather city={city}/></div>);
+    setState({state} + 1);
+    console.log(list);
   }
+
+  //list.unshift(<div className={styles.item}><OneWeather city={''} current={true}/></div>);
+  const cities = ['Berlin', 'Amsterdam', 'Montreal', 'Paris', 'Sydney', 'Tokyo', 'London', 'Madrid', 'Geneva', 'New York'];
+  const routes_list = [];
+  for (const city of cities) {
+    const path = `/${city}`;
+    list.push(<Link to={path}><div className={styles.item}><OneWeather city={city}/></div></Link>);
+    routes_list.push(<Route path={path}><DetailedWeather city={city}/></Route>)
+  }
+
+  // let city = fetch('https://ipinfo.io/json').then(response =>
+  //   response.json().then(data => ({
+  //       data: data,
+  //       status: response.status
+  //     })
+  //   ).then(res => {
+  //     city = res.data.city;
+  //   }));
+
   return (
     <div className={styles.sheet}>
-      <div className={styles.header}>Погода</div>
-      <div>{list}</div>
-      <NewCity/>
-      {/*<header className="App-header">*/}
-      {/*  /!*<img src={logo} className="App-logo" alt="logo" />*!/*/}
-      {/*  <p>*/}
-      {/*    Edit <code>src/App.js</code> and save to reload.*/}
-      {/*  </p>*/}
-      {/*  <a*/}
-      {/*    className="App-link"*/}
-      {/*    href="https://reactjs.org"*/}
-      {/*    target="_blank"*/}
-      {/*    rel="noopener noreferrer"*/}
-      {/*  >*/}
-      {/*    Learn React*/}
-      {/*  </a>*/}
-      {/*</header>*/}
-
+      <Router basename={'/2019-2-Atom-Frontend-A-Kutuzov'}>
+        <Switch>
+          <Route path="/" exact>
+            <div className={styles.header}>
+              <div className={styles.text}>Погода</div>
+            </div>
+            <div>{list}</div>
+            <button onClick={onClick}><NewCity/></button>
+          </Route>
+          {routes_list}
+        </Switch>
+      </Router>
     </div>
   );
 }
